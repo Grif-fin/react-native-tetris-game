@@ -1,0 +1,3 @@
+rootProject.name = 'TetrisWords'
+
+include ':app'
