@@ -1,40 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import React, { PureComponent } from "react";
+import { AppRegistry, StyleSheet, StatusBar } from "react-native";
+import { GameEngine } from "react-native-game-engine";
+import { Finger } from "./renderers";
+import { MoveFinger } from "./systems"
 
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+export default class BestGameEver extends PureComponent {
+  constructor() {
+    super();
+  }
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-export default class App extends Component<Props> {
   render() {
     return (
-      
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <GameEngine 
+        style={styles.container} 
+        systems={[MoveFinger]}
+        entities={{ 
+          1: { position: [40,  200], renderer: <Finger />}, //-- Notice that each entity has a unique id (required)
+          2: { position: [100, 200], renderer: <Finger />}, //-- and a renderer property (optional). If no renderer
+          3: { position: [160, 200], renderer: <Finger />}, //-- is supplied with the entity - it won't get displayed.
+          4: { position: [220, 200], renderer: <Finger />}, 
+          5: { position: [280, 200], renderer: <Finger />}
+        }}>
+
+        <StatusBar hidden={true} />
+
+      </GameEngine>
     );
   }
 }
@@ -42,18 +32,8 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    backgroundColor: "#FFF"
+  }
 });
+
+AppRegistry.registerComponent("BestGameEver", () => BestGameEver);
