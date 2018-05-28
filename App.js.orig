@@ -1,4 +1,9 @@
 import React, { PureComponent } from "react";
+<<<<<<< HEAD
+import { AppRegistry, StyleSheet, Dimensions, View } from "react-native";
+import { GameEngine, GameLoop } from "react-native-game-engine";
+import {Tile} from "./app/tile.js"
+=======
 import { AppRegistry, StyleSheet, Dimensions, View, StatusBar, TouchableOpacity} from "react-native";
 import { ButtonToolbar } from 'react-bootstrap';
 import { GameEngine, GameLoop } from "react-native-game-engine";
@@ -6,6 +11,7 @@ import { Tetromino } from "./app/tetromino.js"
 import { FallingTiles, ControlHandler } from "./app/systems.js"
 import { Joystick } from "./app/joystick.js"
 import Icon from 'react-native-vector-icons/FontAwesome';
+>>>>>>> 6965454... Implement classic Tetris
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 const RADIUS = 25;
@@ -17,6 +23,18 @@ export default class BestGameEver extends PureComponent {
       x: WIDTH / 2 - RADIUS,
       y: HEIGHT / 2 - RADIUS
     };
+<<<<<<< HEAD
+  }
+
+  updateHandler = ({ touches, screen, time }) => {
+    let move = touches.find(x => x.type === "move");
+    if (move) {
+      this.setState({
+        x: this.state.x + move.delta.pageX,
+        y: this.state.y + move.delta.pageY
+      });
+    }
+=======
   }
 
   updateHandler = ({ touches, screen, time }) => {
@@ -102,6 +120,7 @@ export default class BestGameEver extends PureComponent {
       type: "button-pressed",
       action: "right"
     })
+>>>>>>> 6965454... Implement classic Tetris
   };
 
   render() {
@@ -128,9 +147,9 @@ export default class BestGameEver extends PureComponent {
     }
     
     // test set
-    var tetromino_types = ["Z", "I", "L", "O", "T", "T", "O", "L", "Z", "I", "T", "Z", "I", "L"]
-    var tetrominos_input = new Array(tetromino_types.length);
-    for (var y = 0; y < tetromino_types.length; y++) {
+    var tetromino_types = ["Z", "I", "L", "O", "T"]
+    var tetrominos_input = new Array(5);
+    for (var y = 0; y < 5; y++) {
       var type = tetromino_types[y];
       // states: ready, moving, landed
       tetrominos_input[y] = {id: y.toString() ,type: type, position: this.getStartPos(type, grid_width), state: "ready", color: this._getRandomColor()};
@@ -146,6 +165,14 @@ export default class BestGameEver extends PureComponent {
       <GameEngine
         ref={"engine"}
         style={styles.container} 
+<<<<<<< HEAD
+        systems={[]}
+        entities={{ 
+          1: { position: [40,  200], renderer: <Tile />}, //-- Notice that each entity has a unique id (required)
+          2: { position: [100, 200], renderer: <Tile />}
+        }}>
+
+=======
         systems={[FallingTiles, ControlHandler]}
         entities={{ 
           // game_states: ongoing, finished
@@ -153,6 +180,7 @@ export default class BestGameEver extends PureComponent {
           //Controller: {size: [joystick_width, joystick_height], buttonController: buttonsHandlers, position: [joystick_x, joystick_y], renderer: Joystick} 
         }}>
         <StatusBar hidden={true} />
+>>>>>>> 6965454... Implement classic Tetris
 
         <View key="joystickView" style={[styles.joystick, {left: 100, top: game_screen_height}]}>
             <TouchableOpacity onPress={this.onLeftButtonPressed} style={[styles.button]}>
@@ -174,6 +202,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF"
   },
+<<<<<<< HEAD
+  player: {
+    position: "absolute",
+    backgroundColor: "pink",
+    width: RADIUS * 2,
+    height: RADIUS * 2
+=======
   joystick: {
     borderColor: "#ffcc99",
     backgroundColor: "#ffcc99",
@@ -184,6 +219,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button: {
+>>>>>>> 6965454... Implement classic Tetris
   }
 });
 
